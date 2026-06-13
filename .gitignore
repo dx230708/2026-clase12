@@ -1,0 +1,13 @@
+# Caché de ejecución y Python
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Evidencias locales y reportes (no deben ir al repositorio)
+reports/
+*.html
+FALLO_*.png
+
+# Entornos virtuales si usás uno local
+.venv/
+venv/
