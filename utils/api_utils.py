@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 
 class MockResponse:
@@ -77,4 +78,34 @@ def create_user_api(name, job):
         "createdAt": fecha_actual_iso
     }
     
+    return MockResponse(json_data=payload_respuesta, status_code=201) 
+	
+def create_post_api(title, body):
+    """Simula POST /posts generando un ID dinámico y timestamp actual."""
+    id_dinamico = random.randint(100, 999)
+    fecha_actual_iso = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    
+    payload_respuesta = {
+        "id": id_dinamico,
+        "title": title,
+        "body": body,
+        "createdAt": fecha_actual_iso
+    }
     return MockResponse(json_data=payload_respuesta, status_code=201)
+
+def update_post_api(post_id, title):
+    """Simula PATCH /posts/{id} devolviendo el recurso con el título modificado."""
+    fecha_actual_iso = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    
+    payload_respuesta = {
+        "id": post_id,
+        "title": title,
+        "body": "Cuerpo original del post generado por Faker",
+        "updatedAt": fecha_actual_iso
+    }
+    return MockResponse(json_data=payload_respuesta, status_code=200)
+
+def delete_post_api(post_id):
+    """Simula DELETE /posts/{id} retornando éxito (200 OK)."""
+    # Las APIs suelen devolver un JSON vacío o un mensaje de confirmación
+    return MockResponse(json_data={"message": f"Post {post_id} deleted successfully"}, status_code=200)
